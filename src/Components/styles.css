@@ -1,0 +1,16 @@
+.home-cont {
+  height: 100vh;
+}
+
+.searchBlock {
+}
+
+.card-img-company {
+  max-height: 125px;
+  object-fit: contain;
+}
+
+.description-job {
+  width: 70%;
+  font-size: 50% !important;
+}
