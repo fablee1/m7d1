@@ -4,8 +4,14 @@ import { useLocation } from "react-router-dom"
 
 const Results = (props) => {
   const [jobsData, setJobsData] = useState(null)
+  const [jobsShown, setJobsShown] = useState(null)
+  const [page, setPage] = useState(0)
 
   const location = useLocation()
+
+  useEffect(() => {
+    setJobsShown(jobsData?.jobs.slice(0, page * 15 + 15))
+  }, [page])
 
   useEffect(() => {
     const query = new URLSearchParams(location.search)
@@ -16,6 +22,7 @@ const Results = (props) => {
       if (response.ok) {
         const data = await response.json()
         setJobsData(data)
+        setJobsShown(data.jobs.slice(0, page * 15 + 15))
       } else {
         console.log("error")
       }
@@ -26,16 +33,17 @@ const Results = (props) => {
   return (
     <Container>
       <Row className="justify-content-center mt-5">
-        {jobsData && (
+        {jobsShown && (
           <Col xs={12} md={8}>
             <h1 className="text-center">
               Found {jobsData ? jobsData["job-count"] : 0} Jobs
             </h1>
-            {jobsData.jobs.map((j) => (
+            {jobsShown.map((j) => (
               <SingleJob {...j} />
             ))}
           </Col>
         )}
+        <button onClick={() => setPage(page + 1)}>Load More</button>
       </Row>
     </Container>
   )
