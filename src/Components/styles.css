@@ -14,3 +14,19 @@
   width: 70%;
   font-size: 50% !important;
 }
+
+.favourite {
+  background-color: transparent;
+  border: none;
+}
+
+.fav-bar {
+  position: sticky;
+  right: 0;
+  top: 10px;
+  z-index: 10;
+}
+
+.btn-fav {
+  width: 200px;
+}
